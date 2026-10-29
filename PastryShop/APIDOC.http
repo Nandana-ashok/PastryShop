@@ -1,0 +1,40 @@
+###
+GET http://127.0.0.1:8000/pastrys/
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8000/pastrys/
+Content-Type: application/json
+
+{
+    "name":"cheese cake",
+    "description": "original chesse from malco",
+    "price": 900,
+    "stock": 50
+}
+
+###
+GET http://127.0.0.1:8000/pastrys/3/
+Accept: application/json
+
+
+###
+PUT http://127.0.0.1:8000/pastrys/3/
+Content-Type: application/json
+
+{
+    "name":"london Donut",
+    "description": "choclate",
+    "price": 500,
+    "stock": 50
+}
+
+###
+DELETE http://127.0.0.1:8000/pastrys/4/ 
+
+
+###
+GET http://127.0.0.1:8000/pastrys/orders/
+Accept: application/json 
+
