@@ -38,3 +38,15 @@ DELETE http://127.0.0.1:8000/pastrys/4/
 GET http://127.0.0.1:8000/pastrys/orders/
 Accept: application/json 
 
+
+###
+POST http://127.0.0.1:8000/pastrys/orders/
+Content-Type: application/json
+
+{
+    "customer_name": "ajas",
+    "phone": "9883793255",
+    "pastry_id": 2,
+    "quantity" : 20,
+    "order_date" : "2026-10-30"
+}

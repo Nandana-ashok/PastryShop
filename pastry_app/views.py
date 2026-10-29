@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from pastry_app.models import PastryDb,OrderDb
 from pastry_app.serializers import PastrySerializer,OrderSerializer
 from datetime import time,datetime,timedelta
-
+from rest_framework import serializers
 # Create your views here.
 class PastryCreateListView(APIView):
 
@@ -84,9 +84,19 @@ class OrderListCreateView(APIView):
 
                 form_data["token"] = last_order.token + 1
                 current_time = datetime.combine(order_date,last_order.pickup_time)
-                form_data["pickup_time"] = current_time + timedelta(minutes=30)
-                form_data["status"] = "success"
-        
+                next_time = current_time + timedelta(minutes=30)
+
+                if next_time.time() == time(12,30) :
+                    next_time = datetime.combine(order_date,time(13,30))
+
+                if next_time.time() == time(14,0) :
+                    raise serializers.ValidationError("Shop closed...visit again thank you")
+                
+                form_data ["pickup_time"] = next_time.time() 
+
+            
+            
+            form_data["status"] = "success"
             qs = OrderDb.objects.create(**form_data)
             serializer_instance = OrderSerializer(qs)
             return Response({
